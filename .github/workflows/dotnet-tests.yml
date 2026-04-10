@@ -21,9 +21,6 @@ jobs:
       - name: Build
         run: dotnet build src --no-restore
 
-      - name: Run tests
-        run: dotnet test src/MyProject.Tests/MyProject.Tests.csproj --verbosity normal
-
       - name: Test with coverage
         run:  | 
           dotnet test src/MyProject.Tests/MyProject.Tests.csproj \
