@@ -39,6 +39,14 @@ dotnet test src/MyProject.Tests/
 ```
 and expect all tests to pass.
 
+## Check test coverage
+
+```bash
+dotnet test src/MyProject.Tests/MyProject.Tests.csproj   /p:CollectCoverage=true   /p:CoverletOutputFormat=cobertura
+reportgenerator   -reports:**/TestResults/**/coverage.cobertura.xml   -targetdir:coverage-report   -reporttypes:Html
+firefox coverage-report/index.html
+```
+and expect the same degree of coverage as on the badge on GitHub.
 
 
 ## Run the model for a single record specified in the command line
