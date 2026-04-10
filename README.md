@@ -15,6 +15,22 @@ Features:
 
 # Getting started
 
+## Prerequisites
+
+- .NET SDK version 8.0+ matching the project's TargetFramework (see `.csproj`)
+  https://dotnet.microsoft.com/download
+
+No external packages need to be installed manually.
+All dependencies are restored automatically from NuGet.
+
+## Setup
+
+Restore dependencies (optional but useful if you want to be explicit):
+
+```bash
+dotnet restore src
+dotnet build src
+
 ## Run the tests
 
 ```bash
