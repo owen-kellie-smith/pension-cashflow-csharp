@@ -43,7 +43,7 @@ and expect all tests to pass.
 ## Check test coverage
 
 ```bash
-dotnet test src/MyProject.Tests/MyProject.Tests.csproj   /p:CollectCoverage=true   /p:CoverletOutputFormat=cobertura
+dotnet test src/MyProject.Tests/MyProject.Tests.csproj  --collect:"XPlat Code Coverage"
 reportgenerator   -reports:**/TestResults/**/coverage.cobertura.xml   -targetdir:coverage-report   -reporttypes:Html
 firefox coverage-report/index.html
 ```
