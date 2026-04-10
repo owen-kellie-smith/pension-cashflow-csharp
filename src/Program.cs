@@ -122,6 +122,10 @@ Portfolio run:
             List<ModelPoint> modelPoints =
                 ModelPointReader.Load(mpFile, mortFile, age, benefit);
 
+            if (debug){
+                Console.WriteLine($"Read {modelPoints.Count} model points"); // $"...{...}..." means stuff in curly brackets is evaluated
+	    }
+
             var mortalityCache = new Dictionary<string, List<MortalityRow>>();
             var allCashflows = new List<Cashflow>();
 
