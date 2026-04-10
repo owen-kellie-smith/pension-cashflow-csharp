@@ -1,6 +1,7 @@
 # pension-cashflow-model
 
 ![C# Tests](https://github.com/owen-kellie-smith/pension-cashflow-csharp/actions/workflows/dotnet-tests.yml/badge.svg)
+[![codecov](https://codecov.io/gh/owen-kellie-smith/pension-cashflow-csharp/graph/badge.svg?token=XLKV69FV53)](https://codecov.io/gh/owen-kellie-smith/pension-cashflow-csharp)
 
 A simple actuarial-style model written in C#.
 
