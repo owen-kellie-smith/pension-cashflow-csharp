@@ -31,6 +31,7 @@ Restore dependencies (optional but useful if you want to be explicit):
 ```bash
 dotnet restore src
 dotnet build src
+```
 
 ## Run the tests
 
