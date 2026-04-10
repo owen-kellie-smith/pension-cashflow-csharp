@@ -33,10 +33,10 @@ Options:
 Examples:
 
 Single life:
-  dotnet run -- --mort pma92.xls --assets ../../assets/xls --age 65 --benefit 10000 --years 10
+  dotnet run -- --mort pma92.xls --assets ../assets/xls --age 65 --benefit 10000 --years 10 --agg sum_year --output resSingle65.csv
 
 Portfolio run:
-  dotnet run -- --mp mp.csv --assets ../../assets/xls --years 10 --output result.csv
+  dotnet run -- --mp ../assets/csv/MPF.csv --assets ../assets/xls --years 10 --output resMPF.csv
 ");
         }
 
@@ -135,7 +135,7 @@ Portfolio run:
 
                 var mortality = mortalityCache[mp.Mortality];
 
-                allCashflows.AddRange(
+                allCashflows.AddRange( // .AddRange adds another enumerable collection e.g. PensionCalculator.Calculate() which is another List)
                     PensionCalculator.Calculate(mortality, mp, years, rate)
                 );
             }
