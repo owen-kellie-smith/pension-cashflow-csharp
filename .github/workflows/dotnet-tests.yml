@@ -29,6 +29,9 @@ jobs:
       - name: List coverage files
         run: find . -name "*.cobertura.xml"
 
+      - name: Print coverage file sample
+        run: head -n 50 src/MyProject.Tests/TestResults/**/coverage.cobertura.xml
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
