@@ -70,11 +70,11 @@ Portfolio run:
                     case "--help":
                     case "-h":
                         PrintHelp();
-                        return;
+                        return;  // STOP processing any more args and don't act on on the args, just print the hard-coded help statement
 
                     case "--mp":
                         mpFile = args[++i];
-                        break;
+                        break; // stop looking as the other cases -- you' already forund a match
 
                     case "--assets":
                         assetsFolder = args[++i];
