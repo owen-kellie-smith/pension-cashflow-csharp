@@ -9,7 +9,7 @@ namespace PensionModel.IO
     public static class ModelPointReader
     {
         public static List<ModelPoint> Load(
-            string mpFile,
+            string? mpFile,
             string mortFile,
             double age,
             double benefit)
