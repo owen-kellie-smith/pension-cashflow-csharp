@@ -23,7 +23,6 @@ namespace PensionModel.Engine
                 double age = mp.AgeAtVDate + t;
 
                 int clampedAge = Math.Clamp((int)age, minRow.Age, maxRow.Age);
-                clampedAge = (int)age; // test to fail
 
                 var row = mortality.LastOrDefault(m => m.Age <= clampedAge);
                 double qx = row?.Qx ?? 1.0;
