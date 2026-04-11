@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using CsvHelper;
+using CsvHelper.Configuration;
 using PensionModel.Models;
 
 namespace PensionModel.IO
@@ -10,7 +11,7 @@ namespace PensionModel.IO
     {
         public static List<ModelPoint> Load(
             string? mpFile,
-            string mortFile,
+            string? mortFile,
             double age,
             double benefit)
         {
@@ -30,7 +31,11 @@ namespace PensionModel.IO
             var list = new List<ModelPoint>();
 
             using var reader = new StreamReader(mpFile);
-            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                IgnoreBlankLines = true
+            };
+            using var csv = new CsvReader(reader, config);
 
             csv.Read();
             csv.ReadHeader();
