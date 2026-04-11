@@ -13,7 +13,6 @@ namespace PensionModel.App
 // Source - https://stackoverflow.com/a/16265268
 // Posted by Hossein Narimani Rad, modified by community. See post 'Timeline' for change history
 // Retrieved 2026-04-11, License - CC BY-SA 4.0
-
 foreach(var item in args)
 {
 //    Console.WriteLine(item.ToString());
@@ -21,10 +20,10 @@ foreach(var item in args)
 
             for (int i = 0; i < args.Length; i++)
             {
-                if (!dict.TryGetValue(args[i], out var def))
-                    continue;
+                if (!dict.TryGetValue(args[i], out var def)) // def is an ArgDef defined below
+                    continue;   // i.e. just ignore it as a rogue parameter that does no harm
 
-                string value = null;
+                string? value = null;
 
                 if (def.RequiresValue)
                 {
@@ -37,7 +36,7 @@ foreach(var item in args)
                     value = args[++i];
                 }
 
-                def.Apply(config, value);
+                def.Apply(config, value);  // Apply is the Action for args[i] from DictArgs below which mostly sets some Property in config
             }
 
             return config;
@@ -46,8 +45,9 @@ foreach(var item in args)
         private static Dictionary<string, ArgDef> DictArgs() =>
             new(StringComparer.OrdinalIgnoreCase)
             {
-                ["--help"] = new((c, v) => c.ShowHelp = true, false), // false here implies value not required i.e. flag only lke debug
+                ["--help"] = new((c, v) => c.ShowHelp = true, false), // false here implies value not required i.e. flag only like debug
                 ["-h"]     = new((c, v) => c.ShowHelp = true, false),
+
 
                 ["--debug"] = new((c, v) => c.Debug = true, false),
 
