@@ -44,11 +44,20 @@ public class ArgsParserTests
         var args = new[] {  "-h",  };
         App.Run(args);
     }
+    [Fact]
     public void minimal_input_runs_without_error()
     {
         // Arrange
 
-        var args = new[] {  "--debug"  };
+        var args = new[] { "--debug", "--assets", "../../../../../assets/xls"  };
+        App.Run(args);
+    }
+    [Fact]
+    public void mpf_input_runs_without_error()
+    {
+        // Arrange
+
+        var args = new[] { "--debug", "--assets", "../../../../../assets/xls", "--mp", "../../../../../assets/csv/MPF.csv"  };
         App.Run(args);
     }
 }
