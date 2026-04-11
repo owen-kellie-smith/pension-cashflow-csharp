@@ -15,12 +15,17 @@ namespace PensionModel.Engine
         {
             var result = new List<Cashflow>();
             double survival = 1.0;
+            var minRow = mortality.First();
+            var maxRow = mortality.Last();
 
             for (int t = 0; t < years; t++)
             {
                 double age = mp.AgeAtVDate + t;
 
-                var row = mortality.LastOrDefault(m => m.Age <= age);
+                int clampedAge = Math.Clamp((int)age, minRow.Age, maxRow.Age);
+                clampedAge = (int)age; // test to fail
+
+                var row = mortality.LastOrDefault(m => m.Age <= clampedAge);
                 double qx = row?.Qx ?? 1.0;
 
                 survival *= (1 - qx);
