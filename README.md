@@ -75,7 +75,7 @@ where the second column are expected amounts of 10,000 paid at the end of each y
 
 Aggregate over all indices (i.e. over all projection years and all records) to get a single sum:
 ```bash
-dotnet run --project src --mp assets/csv/MPF.csv --assets assets/xls --age 65 --benefit 10000 --years 10 --agg sum --output oMPF.csv
+dotnet run --project src --mp assets/csv/MPF.csv --assets assets/xls  --years 10 --agg sum --output oMPF.csv
 cat oMPF.csv 
 ```
 to get output like
@@ -86,7 +86,7 @@ The 452,801.3762 is the total (for all model points over all 10 projected years)
 
 Aggregate over records only (i.e. separate results by projection year)
 ```bash
-dotnet run --project src --mp assets/csv/MPF.csv --assets assets/xls --age 65 --benefit 10000 --years 10 --agg sum_year --output oMPFsum_year.csv
+dotnet run --project src --mp assets/csv/MPF.csv --assets assets/xls  --years 10 --agg sum_year --output oMPFsum_year.csv
 cat oMPFsum_year.csv 
 ```
 to get output like

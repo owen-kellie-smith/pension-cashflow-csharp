@@ -3,8 +3,8 @@ namespace PensionModel.App
     public class Config
     {
         public string MpFile { get; set; }
-        public string AssetsFolder { get; set; } = "assets";
-        public string MortFile { get; set; } = "xls/pma92.xls";
+        public string AssetsFolder { get; set; } = "assets/xls";
+        public string MortFile { get; set; } = "pma92.xls";
         public string Output { get; set; } = "out.csv";
 
         public double Age { get; set; } = 65;
