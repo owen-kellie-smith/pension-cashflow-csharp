@@ -17,7 +17,7 @@ namespace PensionModel.App
 
 foreach(var item in args)
 {
-    Console.WriteLine(item.ToString());
+//    Console.WriteLine(item.ToString());
 }
 
             var config = ArgsParser.Parse(args);
