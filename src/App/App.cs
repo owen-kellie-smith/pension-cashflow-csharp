@@ -11,14 +11,6 @@ namespace PensionModel.App
     {
         public static void Run(string[] args)
         {
-// Source - https://stackoverflow.com/a/16265268
-// Posted by Hossein Narimani Rad, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-04-11, License - CC BY-SA 4.0
-
-foreach(var item in args)
-{
-//    Console.WriteLine(item.ToString());
-}
 
             var config = ArgsParser.Parse(args);
 
