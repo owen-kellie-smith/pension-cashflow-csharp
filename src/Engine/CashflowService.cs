@@ -19,6 +19,10 @@ namespace PensionModel.Engine
                     cache[mp.Mortality] = mortality;
                 }
 
+                if (config.Debug){
+                    Console.WriteLine( mp.ToString() );
+                }
+
                 allCashflows.AddRange(
                     PensionCalculator.Calculate(
                         mortality,

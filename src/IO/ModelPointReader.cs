@@ -28,29 +28,29 @@ namespace PensionModel.IO
                 };
             }
 
-            var list = new List<ModelPoint>();
-
             using var reader = new StreamReader(mpFile);
+
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                IgnoreBlankLines = true
+                IgnoreBlankLines = true,
+                PrepareHeaderForMatch = args => args.Header.Trim().ToLower()
             };
+
             using var csv = new CsvReader(reader, config);
 
-            csv.Read();
-            csv.ReadHeader();
+            csv.Context.RegisterClassMap<ModelPointMap>();
 
-            while (csv.Read())
-            {
-                list.Add(new ModelPoint
-                {
-                    Mortality = csv.GetField("mortality"),
-                    AgeAtVDate = csv.GetField<double>("age_at_vdate"),
-                    BenefitPA = csv.GetField<double>("benefit_pa")
-                });
-            }
+            return new List<ModelPoint>(csv.GetRecords<ModelPoint>());
+        }
+    }
 
-            return list;
+    public sealed class ModelPointMap : ClassMap<ModelPoint> // selaed class cannot be inherited from
+    {
+        public ModelPointMap()
+        {
+            Map(m => m.Mortality).Name("mortality", "mort", "qx");
+            Map(m => m.AgeAtVDate).Name("age_at_vdate", "age", "AgeAtVDate");
+            Map(m => m.BenefitPA).Name("benefit_pa", "benefit", "BenefitPA");
         }
     }
 }
