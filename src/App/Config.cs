@@ -2,7 +2,7 @@ namespace PensionModel.App
 {
     public class Config
     {
-        public string MpFile { get; set; }
+        public string MpFile { get; set; } = null;
         public string AssetsFolder { get; set; } = "assets/xls";
         public string MortFile { get; set; } = "pma92.xls";
         public string Output { get; set; } = "out.csv";
