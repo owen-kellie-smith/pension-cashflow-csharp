@@ -36,7 +36,7 @@ namespace PensionModel.IO
                 PrepareHeaderForMatch = args => args.Header.Trim().ToLower()
             };
 
-            using var csv = new CsvReader(reader, config);
+            using var csv = new CsvReader(reader, config); // using ensures automatic cleanup
 
             csv.Context.RegisterClassMap<ModelPointMap>();
 
