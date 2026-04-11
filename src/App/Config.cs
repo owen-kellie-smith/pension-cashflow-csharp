@@ -13,7 +13,7 @@ namespace PensionModel.App
         public int Years { get; set; } = 10;
 
         public string Agg { get; set; } = "sum_year";
-        public bool Debug { get; set; }
-        public bool ShowHelp { get; set; }
+        public bool Debug { get; set; } = false;
+        public bool ShowHelp { get; set; } = false;
     }
 }
