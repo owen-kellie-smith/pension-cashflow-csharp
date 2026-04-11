@@ -8,19 +8,31 @@ namespace PensionModel.App
         public static Config Parse(string[] args)
         {
             var config = new Config();  // from App.Config.cs which is POCO with default values
-            var map = BuildMap();
+            var dict = DictArgs();
+
+// Source - https://stackoverflow.com/a/16265268
+// Posted by Hossein Narimani Rad, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-04-11, License - CC BY-SA 4.0
+
+foreach(var item in args)
+{
+//    Console.WriteLine(item.ToString());
+}
 
             for (int i = 0; i < args.Length; i++)
             {
-                if (!map.TryGetValue(args[i], out var def))
+                if (!dict.TryGetValue(args[i], out var def))
                     continue;
 
                 string value = null;
 
                 if (def.RequiresValue)
                 {
+
                     if (i + 1 >= args.Length)
-                        throw new ArgumentException($"Missing value for {args[i]}");
+                        throw new ArgumentException($"Out of args. Missing value for {args[i]}");
+                    if (dict.TryGetValue(args[i+1], out var def2))
+                        throw new ArgumentException($"Next arg recognised. Missing value for {args[i]}");
 
                     value = args[++i];
                 }
@@ -31,7 +43,7 @@ namespace PensionModel.App
             return config;
         }
 
-        private static Dictionary<string, ArgDef> BuildMap() =>
+        private static Dictionary<string, ArgDef> DictArgs() =>
             new(StringComparer.OrdinalIgnoreCase)
             {
                 ["--help"] = new((c, v) => c.ShowHelp = true, false), // false here implies value not required i.e. flag only lke debug
@@ -42,7 +54,7 @@ namespace PensionModel.App
                 ["--mp"]      = new((c, v) => c.MpFile = v, true),
                 ["--assets"]  = new((c, v) => c.AssetsFolder = v, true),
                 ["--mort"]    = new((c, v) => c.MortFile = v, true),
-                ["--agg"]     = new((c, v) => c.Agg = v, true), // target-typed new equivalent to new ArgDef((c, v) => c.Agg = v, true)
+                ["--agg"]     = new((c, v) => c.Agg = v, true), // target-typed new which is equivalent to new ArgDef((c, v) => c.Agg = v, true)
                 ["--output"]  = new((c, v) => c.Output = v, true),
 
                 ["--age"]     = new((c, v) => c.Age = double.Parse(v), true),
