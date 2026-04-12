@@ -23,15 +23,30 @@ namespace PensionModel.Aggregation
                     .ToList();
             }
 
-            return new List<Cashflow>
+            if (type == "sum")
             {
-                new Cashflow
-                {
-                    Year = 0,
-                    CashflowValue = cashflows.Sum(c => c.CashflowValue),
-                    PresentValue = cashflows.Sum(c => c.PresentValue)
-                }
-            };
+                return cashflows
+                    .GroupBy(c => -1)
+                    .Select(g => new Cashflow
+                    {
+                        Year = g.Key,
+                        CashflowValue = g.Sum(c => c.CashflowValue),
+                        PresentValue = g.Sum(c => c.PresentValue)
+                    })
+                    .ToList();
+            }
+            if (true)
+            {
+                return cashflows
+                    .GroupBy(c => -1)
+                    .Select(g => new Cashflow
+                    {
+                        Year = g.Key,
+                        CashflowValue = g.Sum(c => c.CashflowValue),
+                        PresentValue = g.Sum(c => c.PresentValue)
+                    })
+                    .ToList();
+            }
         }
     }
 }
