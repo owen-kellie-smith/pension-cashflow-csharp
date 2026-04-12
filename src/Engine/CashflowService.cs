@@ -13,14 +13,14 @@ namespace PensionModel.Engine
 
             foreach (var mp in modelPoints)
             {
-                if (!cache.TryGetValue(mp.Mortality, out var mortality))
-                {
-                    mortality = MortalityReader.Read(mp.Mortality, config.AssetsFolder);
-                    cache[mp.Mortality] = mortality;
-                }
-
                 if (config.Debug){
                     Console.WriteLine( mp.ToString() );
+                }
+
+                if (!cache.TryGetValue(mp.Mortality, out var mortality)) // try to get pre-read mortality from the cache
+                {
+                    mortality = MortalityReader.Read(mp.Mortality, config.AssetsFolder); // but if you can't, read it ...
+                    cache[mp.Mortality] = mortality;                                     //  ... and cache it
                 }
 
                 allCashflows.AddRange(

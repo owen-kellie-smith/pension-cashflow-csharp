@@ -11,7 +11,6 @@ namespace PensionModel.App
     {
         public static void Run(string[] args)
         {
-
             var config = ArgsParser.Parse(args);
             PrintHelp(config);
             Execute(config);

@@ -14,23 +14,23 @@ namespace PensionModel.Engine
             double rate)
         {
             var result = new List<Cashflow>();
-            double survival = 1.0;
-            var minRow = mortality.First();
-            var maxRow = mortality.Last();
+            double survival = 1.0;  // survival is rolling product of (1 - qx)
+            var firstRowInMortality = mortality.First();
+            var lastRowInMortality = mortality.Last();
 
             for (int t = 0; t < years; t++)
             {
                 double age = mp.AgeAtVDate + t;
 
-                int clampedAge = Math.Clamp((int)age, minRow.Age, maxRow.Age);
+                int clampedAge = Math.Clamp((int)age, firstRowInMortality.Age, lastRowInMortality.Age);
 
-                var row = mortality.LastOrDefault(m => m.Age <= clampedAge);
+                var row = mortality.LastOrDefault(m => m.Age <= clampedAge); // as if mort is constant below min age and above max age 
                 double qx = row?.Qx ?? 1.0;
 
                 survival *= (1 - qx);
 
-                double cash = mp.BenefitPA * survival;
-                double pv = cash * Math.Pow(1 + rate, -(t + 1));
+                double cash = mp.BenefitPA * survival;   // implicitly escalation rate is 0, no guarantee, no second life benefit
+                double pv = cash * Math.Pow(1 + rate, -(t + 1)); // implicitly constant interest rate
 
                 result.Add(new Cashflow
                 {
