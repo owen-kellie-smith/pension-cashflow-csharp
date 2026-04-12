@@ -28,7 +28,8 @@ namespace PensionModel.Aggregation
               .ToList();
       }
 
-      private static Dictionary<string, Func<Cashflow, int>> DictGrouping() =>
+      // Func<Cashflow, int> means a function that takes one Cahflow argument and returns an int
+      private static Dictionary<string, Func<Cashflow, int>> DictGrouping() => 
           new(StringComparer.OrdinalIgnoreCase)
           {
               ["sum_year"] = c => c.Year,
