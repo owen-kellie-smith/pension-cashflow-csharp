@@ -14,7 +14,7 @@ namespace PensionModel.App
 
             var config = ArgsParser.Parse(args);
 
-            if (config.ShowHelp || args.Length == 0)
+            if (config.ShowHelp)
             {
                 PrintHelp();
                 return;

@@ -8,6 +8,11 @@ namespace PensionModel.App
         public static Config Parse(string[] args)
         {
             var config = new Config();  // from App.Config.cs which is POCO with default values
+            if (args.Length ==0){
+                config.ShowHelp = true;
+                return config;
+            }
+
             var dict = DictArgDestinations();  // class defined below
 
             for (int i = 0; i < args.Length; i++)
