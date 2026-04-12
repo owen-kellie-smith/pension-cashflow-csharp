@@ -107,6 +107,7 @@ year
 10    39853.090316   29654.441994
 ```
 
+The expected output is equivalent to the corresponding output (for equivalent inputs) run via a Python model in https://github.com/owen-kellie-smith/pension-cashflow-python.
 
 
 
