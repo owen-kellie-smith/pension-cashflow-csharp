@@ -13,18 +13,15 @@ namespace PensionModel.App
         {
 
             var config = ArgsParser.Parse(args);
-
-            if (config.ShowHelp)
-            {
-                PrintHelp();
-                return;
-            }
-
+            PrintHelp(config);
             Execute(config);
         }
 
         private static void Execute(Config config)
         {
+            if (config.ShowHelp)
+                return;
+
             var modelPoints = ModelPointReader.Load(
                 config.MpFile,
                 config.MortFile,
@@ -44,8 +41,11 @@ namespace PensionModel.App
                 Console.WriteLine($"Processed {modelPoints.Count} model points");
         }
 
-        private static void PrintHelp()
+        private static void PrintHelp(Config config)
         {
+            if (!config.ShowHelp)
+                return;
+
             Console.WriteLine(@"
 Pension Cashflow Model
 
