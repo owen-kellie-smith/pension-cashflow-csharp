@@ -4,49 +4,37 @@ using PensionModel.Models;
 
 namespace PensionModel.Aggregation
 {
-    public static class CashflowAggregator
-    {
-        public static List<Cashflow> Aggregate(
-            List<Cashflow> cashflows,
-            string type)
-        {
-            if (type == "sum_year")
-            {
-                return cashflows
-                    .GroupBy(c => c.Year)
-                    .Select(g => new Cashflow
-                    {
-                        Year = g.Key,
-                        CashflowValue = g.Sum(c => c.CashflowValue),
-                        PresentValue = g.Sum(c => c.PresentValue)
-                    })
-                    .ToList();
-            }
+  public static class CashflowAggregator
+  {
+      public static List<Cashflow> Aggregate(
+          List<Cashflow> cashflows,
+          string type)
+      {
+          var dict = DictGrouping();
 
-            if (type == "sum")
-            {
-                return cashflows
-                    .GroupBy(c => -1)
-                    .Select(g => new Cashflow
-                    {
-                        Year = g.Key,
-                        CashflowValue = g.Sum(c => c.CashflowValue),
-                        PresentValue = g.Sum(c => c.PresentValue)
-                    })
-                    .ToList();
-            }
-            if (true)
-            {
-                return cashflows
-                    .GroupBy(c => -1)
-                    .Select(g => new Cashflow
-                    {
-                        Year = g.Key,
-                        CashflowValue = g.Sum(c => c.CashflowValue),
-                        PresentValue = g.Sum(c => c.PresentValue)
-                    })
-                    .ToList();
-            }
-        }
-    }
+          if (!dict.TryGetValue(type, out var keySelector))
+          {
+              keySelector = dict["default"];
+          }
+
+          return cashflows
+              .GroupBy(keySelector)
+              .Select(g => new Cashflow
+              {
+                  Year = g.Key,
+                  CashflowValue = g.Sum(c => c.CashflowValue),
+                  PresentValue = g.Sum(c => c.PresentValue)
+              })
+              .ToList();
+      }
+
+      private static Dictionary<string, Func<Cashflow, int>> DictGrouping() =>
+          new(StringComparer.OrdinalIgnoreCase)
+          {
+              ["sum_year"] = c => c.Year,
+              ["sum"]      = c => 0,
+              ["default"]  = c => -99
+          };
+  }
+
 }
