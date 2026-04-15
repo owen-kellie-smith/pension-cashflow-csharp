@@ -64,7 +64,8 @@ namespace PensionModel.App
 Pension Cashflow Model
 
 Usage:
-  dotnet run -- [options]
+  pensioncalc [options]
+  dotnet run --project src/App/App.csproj [options]
 
 Options:
   --mort <file>
