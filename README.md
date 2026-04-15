@@ -57,6 +57,7 @@ cat o10.csv
 ```
 to get output like
 ```
+ Year       CashflowValue            PresentValue                                       
     1            9,877.89                9,590.18
     2            9,739.28                9,180.21
     3            9,582.60                8,769.43
@@ -79,6 +80,7 @@ cat oMPF.csv
 ```
 to get output like
 ```
+Year CashflowValue  PresentValue                                       
 0    452801.3762    388434.6276
 ```
 The 452,801.3762 is the total (for all model points over all 10 projected years) of expected (post-mortality) undiscounted cashflow.
@@ -90,8 +92,7 @@ cat oMPFsum_year.csv
 ```
 to get output like
 ```
-      cashflow  present_value
-year                                         
+Year  CashflowValue  PresentValue                                       
 1     49416.800000   47977.475728
 2     48756.050944   45957.254165
 3     48010.369319   43936.289045
