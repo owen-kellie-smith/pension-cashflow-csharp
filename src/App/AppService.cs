@@ -14,8 +14,8 @@ namespace PensionModel.App
         {
     	    var config = ArgsParser.Parse(args);
     	    
-    	      if (config.ShowHelp){
-    	          PrintHelp();
+    	    if (config.ShowHelp){
+                Console.WriteLine(ArgsParser.GetHelpText());
                 return;
             }
                 
@@ -57,29 +57,5 @@ namespace PensionModel.App
             Console.WriteLine($"Wrote {cashflows.Count} cashflows to {config.Output}");
         }
         
-        private static void PrintHelp()
-        {
-
-            Console.WriteLine(@"
-Pension Cashflow Model
-
-Usage:
-  pensioncalc [options]
-  dotnet run --project src/App/App.csproj [options]
-
-Options:
-  --mort <file>
-  --assets <folder>
-  --age <number>
-  --benefit <number>
-  --years <number>
-  --rate <number>
-  --mp <file>
-  --agg <type>
-  --output <file>
-  --debug
-  --help, -h
-");
-        }
     }
 }

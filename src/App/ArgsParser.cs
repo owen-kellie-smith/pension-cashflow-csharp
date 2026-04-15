@@ -42,32 +42,55 @@ namespace PensionModel.App
         private static Dictionary<string, ArgSetter> DictArgDestinations() =>
             new(StringComparer.OrdinalIgnoreCase) //   (StringComparer.OrdinalIgnoreCase) means that e.g. --HELP and --help are equivalent
             {
-                ["--help"] = new((c, v) => c.ShowHelp = true, false), // false here implies value not required i.e. flag only like debug
-                ["-h"]     = new((c, v) => c.ShowHelp = true, false),
-                ["--debug"] = new((c, v) => c.Debug = true, false),
+                ["--help"] = new((c, v) => c.ShowHelp = true, false, "List options"), // false here implies value not required i.e. flag only like debug
+                ["-h"]     = new((c, v) => c.ShowHelp = true, false, "List options"),
+                ["--debug"] = new((c, v) => c.Debug = true, false, "Output interim calcs"),
 
-                ["--mp"]      = new((c, v) => c.MpFile = v, true),
-                ["--assets"]  = new((c, v) => c.AssetsFolder = v, true),
-                ["--mort"]    = new((c, v) => c.MortFile = v, true),
-                ["--agg"]     = new((c, v) => c.Agg = v, true), // target-typed new which is equivalent to new ArgSetter((c, v) => c.Agg = v, true)
-                ["--output"]  = new((c, v) => c.Output = v, true),
+                ["--mp"]      = new((c, v) => c.MpFile = v, true, "Path to model point file"),
+                ["--assets"]  = new((c, v) => c.AssetsFolder = v, true, "Path to assets folder"),
+                ["--mort"]    = new((c, v) => c.MortFile = v, true, "Mortality file for single model point"),
+                ["--agg"]     = new((c, v) => c.Agg = v, true, "Aggregation type"), // target-typed new which is equivalent to new ArgSetter((c, v) => c.Agg = v, true)
+                ["--output"]  = new((c, v) => c.Output = v, true, "Output filename"),
 
-                ["--age"]     = new((c, v) => c.Age = double.Parse(v), true),
-                ["--benefit"] = new((c, v) => c.Benefit = double.Parse(v), true),
-                ["--rate"]    = new((c, v) => c.Rate = double.Parse(v), true),
-                ["--years"]   = new((c, v) => c.Years = int.Parse(v), true),
+                ["--age"]     = new((c, v) => c.Age = double.Parse(v), true, "Current age in years for single model point"),
+                ["--benefit"] = new((c, v) => c.Benefit = double.Parse(v), true, "Benefit amount per year for single model point"),
+                ["--rate"]    = new((c, v) => c.Rate = double.Parse(v), true, "Interest rate per year"),
+                ["--years"]   = new((c, v) => c.Years = int.Parse(v), true, "Number of projection years"),
             };
 
+        public static string GetHelpText()
+        {
+            var dict = DictArgDestinations();
+            var lines = new List<string>();
+
+            lines.Add("New help Usage:");
+            lines.Add("  app [options]");
+            lines.Add("");
+            lines.Add("Options:");
+
+            foreach (var kvp in dict)
+            {
+                var name = kvp.Key;
+                var def = kvp.Value;
+
+                var valueHint = def.RequiresValue ? " <value>" : "";
+                lines.Add($"  {name}{valueHint,-10} {def.HelpText}");
+            }
+
+            return string.Join(Environment.NewLine, lines);
+        }
             
         private class ArgSetter
         {
             public Action<Config, string> Apply { get; }  // no set i.e. it can only be set in the constructor (write-once)
             public bool RequiresValue { get; }
+            public string HelpText { get; }
 
-            public ArgSetter(Action<Config, string> apply, bool requiresValue)
+            public ArgSetter(Action<Config, string> apply, bool requiresValue, string helpText)
             {
                 Apply = apply;
                 RequiresValue = requiresValue;
+                HelpText = helpText;
             }
         }
             
