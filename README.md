@@ -27,13 +27,13 @@ All dependencies are restored automatically from NuGet.
 ## Setup
 
 ```bash
-dotnet clean src/PensionModel.sln
+dotnet clean src
 ```
 
 ## Run the tests
 
 ```bash
-dotnet test src/PensionModel.sln
+dotnet test src
 ```
 and expect all tests to pass.
 
@@ -42,7 +42,7 @@ and expect all tests to pass.
 ```bash
 rm -rf src/MyProject.Tests/TestResults/
 rm -rf coverage-report
-dotnet test src/PensionModel.sln  --collect:"XPlat Code Coverage"
+dotnet test src  --collect:"XPlat Code Coverage"
 reportgenerator   -reports:**/TestResults/**/coverage.cobertura.xml   -targetdir:coverage-report   -reporttypes:Html
 firefox coverage-report/index.html
 ```
@@ -56,6 +56,7 @@ and expect the same degree of coverage as on the badge on GitHub.
 This project can be installed as a global .NET tool:
 
 ```bash
+dotnet pack src/App/App.csproj -c Release
 dotnet tool install -g PensionCalc.Tool
 ```
 
