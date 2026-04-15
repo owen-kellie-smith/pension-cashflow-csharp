@@ -57,7 +57,7 @@ This project can be installed as a global .NET tool:
 
 ```bash
 dotnet pack src/App/App.csproj -c Release
-dotnet tool install -g PensionCalc.Tool
+dotnet tool install -g PensionCalc.Tool --add-source ./src/App/nupkg```
 ```
 
 then run
