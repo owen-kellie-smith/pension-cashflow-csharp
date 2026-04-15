@@ -25,7 +25,7 @@ namespace PensionModel.Aggregation
                   CashflowValue = g.Sum(c => c.CashflowValue),
                   PresentValue = g.Sum(c => c.PresentValue)
               })
-              .ToList();   // g is a group selected by .GroupBy(keySelector). g.key is the grouping key (year or 0 or -99). g.Sum loops over all items in the group.  If grouping key is constant say 0 or -99 then it's the same key for all cashflows and so all cashflows are in a single group.
+              .ToList();   // g is a group selected by .GroupBy(keySelector). g.key is the grouping key (c.year or 0 or -99). g.Sum loops over all items in the group.  If grouping key is constant say 0 or -99 then it's the same key for all cashflows and so all cashflows are in a single group.
       }
 
       // Func<Cashflow, int> means a function that takes one Cahflow argument and returns an int

@@ -26,17 +26,14 @@ All dependencies are restored automatically from NuGet.
 
 ## Setup
 
-Restore dependencies (optional but useful if you want to be explicit):
-
 ```bash
-dotnet restore src
-dotnet build src
+dotnet clean src/PensionModel.sln
 ```
 
 ## Run the tests
 
 ```bash
-dotnet test src/MyProject.Tests/
+dotnet test src/PensionModel.sln
 ```
 and expect all tests to pass.
 
@@ -45,7 +42,7 @@ and expect all tests to pass.
 ```bash
 rm -rf src/MyProject.Tests/TestResults/
 rm -rf coverage-report
-dotnet test src/MyProject.Tests/MyProject.Tests.csproj  --collect:"XPlat Code Coverage"
+dotnet test src/PensionModel.sln  --collect:"XPlat Code Coverage"
 reportgenerator   -reports:**/TestResults/**/coverage.cobertura.xml   -targetdir:coverage-report   -reporttypes:Html
 firefox coverage-report/index.html
 ```

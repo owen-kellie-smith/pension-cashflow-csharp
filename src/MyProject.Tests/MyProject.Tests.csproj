@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\2_PensionModelCSharp.csproj" />
+    <ProjectReference Include="..\PensionModel.csproj" />
   </ItemGroup>
 
 </Project>
