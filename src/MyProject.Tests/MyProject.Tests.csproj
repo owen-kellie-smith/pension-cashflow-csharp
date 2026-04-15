@@ -24,6 +24,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PensionModel.csproj" />
+    <ProjectReference Include="..\Engine\Engine.csproj" />
+    <ProjectReference Include="..\IO\IO.csproj" />
+    <ProjectReference Include="..\Aggregation\Aggregation.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../assets/**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

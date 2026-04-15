@@ -1,15 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>_PensionModel</RootNamespace>
+    <RootNamespace>PensionModel</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="MyProject.Tests/**/*.cs" />
+    <!-- STOP implicit inclusion of everything -->
+    <Compile Remove="**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="App/App.csproj" />
+    <ProjectReference Include="Engine/Engine.csproj" />
+    <ProjectReference Include="IO/IO.csproj" />
+    <ProjectReference Include="Models/Models.csproj" />
+    <ProjectReference Include="Aggregation/Aggregation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CsvHelper" Version="33.1.0" />
     <PackageReference Include="ExcelDataReader" Version="3.8.0" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.8.0" />

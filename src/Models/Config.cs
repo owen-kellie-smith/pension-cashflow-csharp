@@ -1,4 +1,4 @@
-namespace PensionModel.App
+namespace PensionModel.Models
 {
     public class Config
     {

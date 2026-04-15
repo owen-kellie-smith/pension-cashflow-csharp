@@ -49,10 +49,28 @@ firefox coverage-report/index.html
 and expect the same degree of coverage as on the badge on GitHub.
 
 
-## Run the model for a single record specified in the command line
+---
+
+## CLI tool usage
+
+This project can be installed as a global .NET tool:
 
 ```bash
-dotnet run --project src --mort pma92.xls --assets assets/xls --age 65 --benefit 10000 --years 10 --agg sum_year --output o10.csv
+dotnet tool install -g PensionCalc.Tool
+```
+
+then run
+
+```bash
+pensioncalc --help
+```
+
+## Run the model for a single record specified in the command line
+
+Once installed as a CLI tool:
+
+```bash
+pensioncalc --mort pma92.xls --assets assets/xls --age 65 --benefit 10000 --years 10 --agg sum_year --output o10.csv
 cat o10.csv 
 ```
 to get output like
@@ -75,7 +93,7 @@ where the second column are expected amounts of 10,000 paid at the end of each y
 
 Aggregate over all indices (i.e. over all projection years and all records) to get a single sum:
 ```bash
-dotnet run --project src --mp assets/csv/MPF.csv --assets assets/xls  --years 10 --agg sum --output oMPF.csv
+pensioncalc --mp assets/csv/MPF.csv --assets assets/xls  --years 10 --agg sum --output oMPF.csv
 cat oMPF.csv 
 ```
 to get output like
@@ -87,7 +105,7 @@ The 452,801.3762 is the total (for all model points over all 10 projected years)
 
 Aggregate over records only (i.e. separate results by projection year)
 ```bash
-dotnet run --project src --mp assets/csv/MPF.csv --assets assets/xls  --years 10 --agg sum_year --output oMPFsum_year.csv
+pensioncalc --mp assets/csv/MPF.csv --assets assets/xls  --years 10 --agg sum_year --output oMPFsum_year.csv
 cat oMPFsum_year.csv 
 ```
 to get output like

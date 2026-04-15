@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using PensionModel.Models;
-using PensionModel.IO;
+
 
 namespace PensionModel.Engine
 {
     public static class CashflowService
     {
-        public static List<Cashflow> Build(List<ModelPoint> modelPoints, App.Config config)
+	public static List<Cashflow> Build(
+    		List<ModelPoint> modelPoints,
+    		Dictionary<string, List<MortalityRow>> mortalityCache,
+    		Config config)
         {
-            var cache = new Dictionary<string, List<MortalityRow>>();
             var allCashflows = new List<Cashflow>();
 
             foreach (var mp in modelPoints)
@@ -17,11 +19,7 @@ namespace PensionModel.Engine
                     Console.WriteLine( mp.ToString() );
                 }
 
-                if (!cache.TryGetValue(mp.Mortality, out var mortality)) // try to get pre-read mortality from the cache
-                {
-                    mortality = MortalityReader.Read(mp.Mortality, config.AssetsFolder); // but if you can't, read it ...
-                    cache[mp.Mortality] = mortality;                                     //  ... and cache it
-                }
+    		var mortality = mortalityCache[mp.Mortality];
 
                 allCashflows.AddRange(
                     PensionCalculator.Calculate(

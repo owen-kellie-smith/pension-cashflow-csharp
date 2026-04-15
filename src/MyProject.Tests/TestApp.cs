@@ -40,18 +40,18 @@ public class ArgsParserTests
     public void help_file_shown_without_error()
     {
         var args = new[] {  "-h",  };
-        App.Run(args);
+        AppService.Run(args);
     }
     [Fact]
     public void minimal_input_runs_without_error()
     {
         var args = new[] { "--debug", "--assets", "../../../../../assets/xls"  };
-        App.Run(args);
+        AppService.Run(args);
     }
     [Fact]
     public void mpf_input_runs_without_error()
     {
         var args = new[] { "--debug", "--assets", "../../../../../assets/xls", "--mp", "../../../../../assets/csv/MPF.csv"  };
-        App.Run(args);
+        AppService.Run(args);
     }
 }
